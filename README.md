@@ -1,8 +1,6 @@
 
 # DeFi-StableCoin
 
-A decentralized finance (DeFi) stablecoin project designed to provide a stable digital currency backed by smart contracts.
-
 ## Table of Contents
 
 - [About](#about)
