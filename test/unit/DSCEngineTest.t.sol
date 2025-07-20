@@ -90,4 +90,29 @@ contract DSCEngineTest is Test {
         assertEq(totalDscMinted, expectedTotalDscMinted);
         assertEq(AMOUNT_COLLATERAL, expectedDepositAmount);
     }
+
+    function testRedeemCollateralAfterBurn() public depositedCollateral {
+        vm.startPrank(USER);
+
+        uint256 mintAmount = 3 ether;
+        dscEngine.mintDsc(mintAmount);
+
+        // Approve DSC tokens before burn
+        dsc.approve(address(dscEngine), mintAmount);
+        dscEngine.burnDsc(mintAmount);
+
+        // Check collateral before redeem
+        (, uint256 collateralBefore) = dscEngine.getAccountInformation(USER);
+
+        uint256 redeemAmount = 1 ether;
+        dscEngine.redeemCollateral(weth, redeemAmount);
+
+        // Check collateral after redeem
+        (, uint256 collateralAfter) = dscEngine.getAccountInformation(USER);
+
+        vm.stopPrank();
+
+        // Assert collateral reduced after redeem
+        assert(collateralAfter < collateralBefore);
+    }
 }
