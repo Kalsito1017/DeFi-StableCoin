@@ -33,4 +33,13 @@ contract Invariants is StdInvariant, Test {
         uint256 wbtcValue = dscEngine.getUsdValue(wbtc, totalBtcDeposited);
         assert(wethValue + wbtcValue >= totalSupply);
     }
+    function invariant_gettersShouldNotRevert() public view {
+        dscEngine.getCollateralTokens();
+        dscEngine.getCollateralPrice(weth);
+        dscEngine.getCollateralPrice(wbtc);
+        dscEngine.getAccountInformation(address(this));
+        dscEngine.getHealthFactor(address(this));
+        dscEngine.getLiquidationThreshold(weth);
+        dscEngine.getLiquidationThreshold(wbtc);
+    }
 }
