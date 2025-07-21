@@ -1,13 +1,12 @@
+DeFi-StableCoin
+Table of Contents
+About
 
-# DeFi-StableCoin
+Features
 
-## Table of Contents
+Libraries Used
 
-- [About](#about)
-- [Features](#features)
-
-## About
-
+About
 DeFi-StableCoin is a decentralized stablecoin protocol built on blockchain technology. It leverages smart contracts to maintain a stable value peg, typically to a fiat currency like the US Dollar, through algorithmic mechanisms or collateral backing.
 
 The core components include:
@@ -24,9 +23,18 @@ Decentralized Finance (DeFi) Integration: Compatibility with existing DeFi platf
 
 This architecture ensures transparency, censorship resistance, and reduces reliance on centralized authorities while providing users with a reliable, programmable, and trustless stable digital asset.
 
-## Features
+Features
+Stablecoin backed by decentralized mechanisms
 
-- Stablecoin backed by decentralized mechanisms
-- Smart contract integration
-- Secure and transparent transactions
-- Compatible with Ethereum-based wallets
+Smart contract integration
+
+Secure and transparent transactions
+
+Compatible with Ethereum-based wallets
+
+Libraries Used
+forge-std: A standard library for Foundry that provides utilities for testing, fuzzing, invariant testing, and debugging Solidity smart contracts. It helps build robust, well-tested contracts by offering easy-to-use testing frameworks and cheat codes.
+
+OpenZeppelin Contracts: A widely-used library of secure and community-vetted smart contract components, including ERC20 token standards, access control, and other reusable contract modules. This project uses OpenZeppelin for standard token interfaces and security best practices.
+
+Chainlink Brownie: Chainlink's integration with the Brownie Python framework for smart contract development, testing, and deployment. It includes mocks and interfaces for interacting with Chainlink oracles, enabling secure and reliable price feeds used in the stablecoin protocol.
