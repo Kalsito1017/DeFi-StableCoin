@@ -2,6 +2,7 @@
 pragma solidity ^0.8.19;
 
 import {Test} from "lib/forge-std/src/Test.sol";
+import {console} from "lib/forge-std/src/console.sol";
 import {StdInvariant} from "lib/forge-std/src/StdInvariant.sol";
 import {DeployDSC} from "script/DeployDSC.s.sol";
 import {DSCEngine} from "src/DSCEngine.sol";
@@ -24,6 +25,7 @@ contract Invariants is StdInvariant, Test {
         (, , weth, wbtc, ) = config.activeNetworkConfig();
         //targetContract(address(dscEngine));
         handler = new Handler(dscEngine, dsc);
+        targetContract(address(handler));
     }
     function invariant_protocolMustHaveMoreValueThanSuply() public view {
         uint256 totalSupply = dsc.totalSupply();
@@ -31,15 +33,17 @@ contract Invariants is StdInvariant, Test {
         uint256 totalBtcDeposited = IERC20(wbtc).balanceOf(address(dscEngine));
         uint256 wethValue = dscEngine.getUsdValue(weth, totalWthDeposited);
         uint256 wbtcValue = dscEngine.getUsdValue(wbtc, totalBtcDeposited);
+        console.log("wethValue: %s", wethValue);
+        console.log("wbtcValue: %s", wbtcValue);
+        console.log("totalSupply: %s", totalSupply);
+
         assert(wethValue + wbtcValue >= totalSupply);
     }
     function invariant_gettersShouldNotRevert() public view {
         dscEngine.getCollateralTokens();
-        dscEngine.getCollateralPrice(weth);
-        dscEngine.getCollateralPrice(wbtc);
         dscEngine.getAccountInformation(address(this));
         dscEngine.getHealthFactor(address(this));
-        dscEngine.getLiquidationThreshold(weth);
-        dscEngine.getLiquidationThreshold(wbtc);
+        dscEngine.getLiquidationThreshold();
+        dscEngine.getLiquidationThreshold();
     }
 }

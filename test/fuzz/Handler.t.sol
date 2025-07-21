@@ -37,7 +37,7 @@ contract Handler is Test {
             .getAccountInformation(sender);
         int256 maxDscToMint = (int256(collateralValueInUsd) / 2) -
             int256(totalDscMinted);
-        if (maxDscToMint == 0) {
+        if (maxDscToMint < 0) {
             return;
         }
         uint256 amount = bound(amountDsc, 0, uint256(maxDscToMint));
