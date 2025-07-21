@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.30;
 
 import {Test} from "lib/forge-std/src/Test.sol";
 import {DecentralizedStableCoin} from "src/DecentralizedStableCoin.sol";
@@ -23,6 +23,12 @@ contract Handler is Test {
         address[] memory collateralTokens = dscEngine.getCollateralTokens();
         weth = ERC20Mock(collateralTokens[0]);
         wbtc = ERC20Mock(collateralTokens[1]);
+    }
+    function mintDsc(uint256 amountDsc) public {
+        uint256 amount = bound(amountDsc, 1, MAX_DEPOSIT_SIZE);
+        vm.startPrank(msg.sender);
+        dscEngine.mintDsc(amount);
+        vm.stopPrank();
     }
     function depositCollateral(
         uint256 collateralSeed,
