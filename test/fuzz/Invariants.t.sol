@@ -8,7 +8,7 @@ import {DSCEngine} from "src/DSCEngine.sol";
 import {DecentralizedStableCoin} from "src/DecentralizedStableCoin.sol";
 import {HelperConfig} from "script/HelperConfig.s.sol";
 import {IERC20} from "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
-
+import {Handler} from "test/fuzz/Handler.t.sol";
 contract Invariants is StdInvariant, Test {
     DeployDSC deployer;
     DSCEngine dscEngine;
@@ -16,12 +16,14 @@ contract Invariants is StdInvariant, Test {
     DecentralizedStableCoin dsc;
     address weth;
     address wbtc;
+    Handler handler;
 
     function setUp() public {
         deployer = new DeployDSC();
         (dsc, dscEngine, config) = deployer.run();
         (, , weth, wbtc, ) = config.activeNetworkConfig();
-        targetContract(address(dscEngine));
+        //targetContract(address(dscEngine));
+        handler = new Handler(dscEngine, dsc);
     }
     function invariant_protocolMustHaveMoreValueThanSuply() public view {
         uint256 totalSupply = dsc.totalSupply();
