@@ -30,5 +30,10 @@ This architecture ensures transparency, censorship resistance, and reduces relia
 ## Libraries Used
 
 - **forge-std:** A standard library for Foundry that provides utilities for testing, fuzzing, invariant testing, and debugging Solidity smart contracts. It helps build robust, well-tested contracts by offering easy-to-use testing frameworks and cheat codes.
+
 - **OpenZeppelin Contracts:** A widely-used library of secure and community-vetted smart contract components, including ERC20 token standards, access control, and other reusable contract modules. This project uses OpenZeppelin for standard token interfaces and security best practices.
+
 - **Chainlink Brownie:** Chainlink's integration with the Brownie Python framework for smart contract development, testing, and deployment. It includes mocks and interfaces for interacting with Chainlink oracles, enabling secure and reliable price feeds used in the stablecoin protocol.
+
+- **OracleLib (Custom Library):** A Solidity library created to safely handle price feed updates using Chainlink oracles. It verifies the freshness of price data by checking the timestamp against a timeout threshold (3 hours), preventing the use of stale prices in the Decentralized Stable Coin system.
+
