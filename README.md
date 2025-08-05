@@ -80,7 +80,10 @@ A custom Solidity utility library used to:
 
 ---
 
-## 🔐 License
 
-This project is licensed under the [MIT License](LICENSE).
+## Disclaimer
+
+This codebase is for educational purposes only and has not undergone a security review.
+
+
 
